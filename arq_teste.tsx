@@ -1,1 +1,1 @@
-//arquivo da branch teste. 
+//arquivo da branch teste. que foi para main, agora pra novo_teste e volta para main com os outros arquivos ar_novoteste.ts e teste.ts
