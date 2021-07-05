@@ -1,70 +1,28 @@
-import { FormEvent } from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { useParams } from 'react-router-dom'
-import logoImg from '../assets/images/logo.svg'
-import { Button } from '../components/Button/Button'
-import { RoomCode } from '../components/RoomCode'
 import { useAuth } from '../hooks/useAuth'
+import { useRoom } from '../hooks/useRoom'
 import { database } from '../services/firebase'
 
-import '../styles/room.scss'
+import logoImg from '../assets/images/logo.svg'
+import { Button } from '../components/Button/Button'
+import { Question } from '../components/Question'
+import { RoomCode } from '../components/RoomCode'
 
-// Para dizer que o tipo é um objeto chamamos de Record e nesse caso recebe 2 parâmetros, primeiro string, que é o Id da room e o segundo outro objeto, que é questions. Por saber quais são as propriedades dentro de questions, podemos representar este objeto por {}
-type FirebaseQuestions = Record<string, {
-  author: {
-    name: string;
-    avatar: string;
-  }
-  content: string;
-  isAnswered: boolean;
-  isHighlighted: boolean;
-}>
+import '../styles/room.scss'
+import { LikeButton } from '../components/LikeButton'
 
 type RoomParams = {
   id: string;
-}
-
-type Question = {
-  id: string;
-  author: {
-    name: string;
-    avatar: string;
-  }
-  content: string;
-  isAnswered: boolean;
-  isHighlighted: boolean;
 }
 
 export const Room = () => {
   const { user } = useAuth()
   const params = useParams<RoomParams>()
   const [newQuestion, setNewQuestion] = useState('')
-  const [questions, setQuestions] = useState<Question[]>([])
-  const [title, setTitle] = useState('')
-
   const roomId = params.id
-
-  useEffect(()=>{
-    const roomRef = database.ref(`rooms/${roomId}`)
-
-    roomRef.once('value', room => { //once e val são do firebase. once quer dizer ouvir o evento apenas uma vez, se houvessem mais vezes seria on. E o val é para buscar os valores que estão ali. 
-      const databaseRoom = room.val()
-      const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-        return {
-          id: key,
-          content: value.content,
-          author: value.author,
-          isHighlighted: value.isHighlighted,
-          isAnswered: value.isAnswered
-        }
-      })
-
-      setTitle(databaseRoom.title)
-      setQuestions(parsedQuestions)
-    })
-  }, [roomId])
+  
+  const { questions, title } = useRoom(roomId)  
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault()
@@ -94,6 +52,15 @@ export const Room = () => {
 
   }
 
+  async function handleLikeQuestion(questionId: string, likeId: string | undefined) {
+    if (likeId) {
+      await database.ref(`rooms/${roomId}/questions/${questionId}/likes/${likeId}`).remove()
+    } else {
+      await database.ref(`rooms/${roomId}/questions/${questionId}/likes`).push({
+        authorId: user?.id
+      })
+    }
+  }
 
   return (
     <div id="page-room">
@@ -130,7 +97,17 @@ export const Room = () => {
           </div>
         </form>
 
-        {JSON.stringify(questions)}
+        <div className="questionList">
+          {questions.map(question => (
+            <Question key={question.id} content={question.content} author={question.author}>
+              <LikeButton 
+                onHandleClick={() => handleLikeQuestion(question.id, question.likeId)} 
+                likeCount={question.likeCount}
+                isLiked={question.likeId}
+              />
+            </Question>
+          ))}
+        </div>
 
       </main>
     </div>

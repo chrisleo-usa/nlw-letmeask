@@ -15,6 +15,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    // para o chrome
+    align-self: stretch;
   }
 
   span {
