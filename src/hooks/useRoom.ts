@@ -38,8 +38,8 @@ export const useRoom = (roomId: string) => {
   useEffect(()=>{
     const roomRef = database.ref(`rooms/${roomId}`)
 
-    roomRef.once('value', room => { //once e val são do firebase. once quer dizer ouvir o evento apenas uma vez, se houvessem mais vezes seria on. E o val é para buscar os valores que estão ali. 
-      const databaseRoom = room.val()
+    roomRef.on('value', room => { //once e val são do firebase. once quer dizer ouvir o evento apenas uma vez, se houvessem mais vezes seria on. E o val é para buscar os valores que estão ali. 
+      const databaseRoom = room.val() // Caso a aplicação cresça, é necessário utilizar outras regras do firebase (child added, child changed, removed...) ao invés do val, por questões de performance. 
       const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
       const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
         return {

@@ -99,7 +99,13 @@ export const Room = () => {
 
         <div className="questionList">
           {questions.map(question => (
-            <Question key={question.id} content={question.content} author={question.author}>
+            <Question 
+              key={question.id} 
+              content={question.content} 
+              author={question.author}
+              isAnswered={question.isAnswered}
+              isHighlighted={question.isHighlighted}  
+            >
               <LikeButton 
                 onHandleClick={() => handleLikeQuestion(question.id, question.likeId)} 
                 likeCount={question.likeCount}
