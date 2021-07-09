@@ -1,0 +1,36 @@
+.container {
+  height: 60vh;
+  background: #835afd;
+  @apply p-4;
+
+  @apply grid grid-cols-1;
+  @apply items-center;
+  @apply justify-items-center;
+
+  .imgContainer {
+    @apply w-full;
+    min-width: 200px;
+    max-width: 250px;
+ß
+    img {
+      @apply w-full;
+    }
+  }
+
+  .content {
+    @apply text-white;
+    @apply flex flex-col;
+    @apply gap-2;
+
+    strong {
+      @apply font-poppins;
+      @apply text-3xl;
+    }
+
+    p {
+      @apply font-roboto;
+      @apply text-lg;
+      @apply filter brightness-90;
+    }
+  }
+}

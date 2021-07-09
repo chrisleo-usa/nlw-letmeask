@@ -5,9 +5,9 @@ import { database } from '../services/firebase'
 import { useAuth } from '../hooks/useAuth'
 import { Button } from '../components/Button/Button'
 
-import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg'
 import googleIconImg from '../assets/images/google-icon.svg'
+import { Banner } from '../components/Banner'
 
 import '../styles/auth.scss'
 
@@ -47,20 +47,16 @@ export const Home = () => {
   }
 
   return (
-    <div id="page-auth">
-      <aside>
-        <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
-        <strong>Crie salas de Q&amp;A ao vivo</strong>
-        <p>Tire as dúvidas da sua audiência em tempo real</p>
-      </aside>
+    <div id="page-auth" className="flex flex-col">
+      <Banner />
       <main>
-        <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+        <div className="main-content p-4 flex flex-col">
+          <img className="self-center" src={logoImg} alt="Letmeask" />
           <button onClick={handleCreateRoom} className="create-room">
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
           </button>
-          <div className="separator">ou entre em uma sala</div>
+          <div className="separator">ou entre em uma sala</div> 
           <form onSubmit={handleJoinRoom}>
             <input
               type="text" 
