@@ -1,17 +1,16 @@
-.container {
-  height: 60vh;
+.bannerContainer {
   background: #835afd;
-  @apply p-4;
+  @apply p-4 sm:p-6 lg:p-20;
 
-  @apply grid grid-cols-1;
-  @apply items-center;
-  @apply justify-items-center;
+  @apply flex flex-col;
+  @apply items-center sm:items-start;
+  @apply justify-center;
 
   .imgContainer {
     @apply w-full;
     min-width: 200px;
-    max-width: 250px;
-ß
+    max-width: 313px;
+
     img {
       @apply w-full;
     }

@@ -42,6 +42,11 @@
 //     justify-content: center;
 //   }
 
+  .main-content {
+    @apply flex flex-col;
+    @apply justify-center;
+  }
+
 //   .main-content {
 //     display: flex;
 //     flex-direction: column;
@@ -141,6 +146,30 @@
       height: 1px;
       background: #a8a8b3;
       margin-left: 16px;
+    }
+  }
+}
+
+@screen sm {
+  #page-auth {
+    @apply grid grid-cols-12;
+    @apply h-screen;
+    @apply items-stretch;
+
+    > div:first-child {
+      @apply col-span-5;
+    }
+
+    main {
+      @apply col-span-7;
+      @apply flex flex-col;
+      @apply items-center;
+      @apply justify-center;
+
+      > div {
+        width: 320px;
+        @apply p-0;
+      }
     }
   }
 }

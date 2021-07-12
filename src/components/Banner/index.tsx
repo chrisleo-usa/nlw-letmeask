@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 export const Banner = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.bannerContainer}>
       <div className={styles.imgContainer}>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
       </div>

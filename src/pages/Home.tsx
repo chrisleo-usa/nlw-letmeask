@@ -50,7 +50,7 @@ export const Home = () => {
     <div id="page-auth" className="flex flex-col">
       <Banner />
       <main>
-        <div className="main-content p-4 flex flex-col">
+        <div className="main-content p-4">
           <img className="self-center" src={logoImg} alt="Letmeask" />
           <button onClick={handleCreateRoom} className="create-room">
             <img src={googleIconImg} alt="Logo do Google" />
