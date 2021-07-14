@@ -71,7 +71,7 @@ export const Room = () => {
         </div>
       </header>
 
-      <main className="content">
+      <main>
         <div className="room-title">
           <h1>Sala {title}</h1>
           {questions.length > 0 && <span>{questions.length} {questions.length > 1 ? 'perguntas' : 'pergunta'}</span>}
@@ -93,7 +93,7 @@ export const Room = () => {
             ) : (
               <span>Para enviar uma pergunta, <button>faça seu login</button></span>
             )}
-            <Button type="submit" disabled={!user}>Enviar pergunta</Button>
+            <Button className="whitespace-nowrap" type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
         </form>
 

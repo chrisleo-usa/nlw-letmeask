@@ -1,7 +1,8 @@
+import classnames from "classnames"
 import { FormEvent } from "react"
 import { Button } from "../Button/Button"
 
-import './styles.module.scss'
+import styles from './styles.module.scss'
 
 interface FormNewRoomProps {
   onSubmit: (event: FormEvent) => void;
@@ -21,7 +22,7 @@ export const FormNewRoom = ({
   className
 }:FormNewRoomProps ) => {
   return (
-    <form onSubmit={onSubmit} className={className}>
+    <form onSubmit={onSubmit} className={classnames(styles.formNewRoom, className)}>
       <input 
         type="text" 
         placeholder={inputPlaceholder}
