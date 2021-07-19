@@ -2,14 +2,13 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useRoom } from '../hooks/useRoom'
 import { database } from '../services/firebase'
 
+import { Question } from '../components/Question'
+import { RoomHeader } from '../components/RoomHeader'
+
 import logoImg from '../assets/images/logo.svg'
 import deleteImg from '../assets/images/delete.svg'
 import checkImg from '../assets/images/check.svg'
 import answerImg from '../assets/images/answer.svg'
-import { Button } from '../components/Button/Button'
-import { Question } from '../components/Question'
-import { RoomCode } from '../components/RoomCode'
-
 import '../styles/room.scss'
 
 type AdminRoomParams = {
@@ -52,17 +51,12 @@ export const AdminRoom = () => {
   }
   return (
     <div id="page-room">
-      <header>
-        <div className="content">
-          <img src={logoImg} alt="Letmeask" />
-          <div>
-            <RoomCode code={params.id}/>
-            <Button isOutlined onClick={handleEndRoom}>
-              Encerrar sala
-            </Button>
-          </div>
-        </div>
-      </header>
+      <RoomHeader 
+        imgSrc={logoImg} 
+        imgAlt="letmeask"
+        roomId={params.id}
+        onClick={handleEndRoom}  
+      />
 
       <main>
         <div className="room-title">

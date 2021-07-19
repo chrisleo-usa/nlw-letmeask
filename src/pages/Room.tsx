@@ -4,13 +4,13 @@ import { useAuth } from '../hooks/useAuth'
 import { useRoom } from '../hooks/useRoom'
 import { database } from '../services/firebase'
 
-import logoImg from '../assets/images/logo.svg'
 import { Button } from '../components/Button/Button'
 import { Question } from '../components/Question'
-import { RoomCode } from '../components/RoomCode'
-
-import '../styles/room.scss'
 import { LikeButton } from '../components/LikeButton'
+import { RoomHeader } from '../components/RoomHeader'
+
+import logoImg from '../assets/images/logo.svg'
+import '../styles/room.scss'
 
 type RoomParams = {
   id: string;
@@ -64,12 +64,11 @@ export const Room = () => {
 
   return (
     <div id="page-room">
-      <header>
-        <div className="content">
-          <img src={logoImg} alt="Letmeask" />
-          <div><RoomCode code={params.id}/></div>
-        </div>
-      </header>
+      <RoomHeader
+        imgSrc={logoImg} 
+        imgAlt="Letmeask" 
+        roomId={params.id}
+      />
 
       <main>
         <div className="room-title">

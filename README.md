@@ -5,6 +5,7 @@
 * [ ] Modal para encerrar sala
 * [ ] Tema Dark
 * [ ] Versao PWA
-* [ ] Alguma lib de CSS
+* [X] Alguma lib de CSS
+* [ ] Adicionar Toasts
 * [ ] ESlint, prettier
 * [ ] Github Readme
